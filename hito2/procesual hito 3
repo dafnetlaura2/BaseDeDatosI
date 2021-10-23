@@ -1,0 +1,49 @@
+ categorias
+● productos
+● cliente
+● pedido
+● detalle_pedido
+
+create table dbo.cliente
+(
+    id_cliente INTEGER IDENTITY PRIMARY KEY NOT NULL,
+    nombre VARCHAR (100)NOT NULL,
+    apellido VARCHAR(50)NOT NULL,
+    direccion VARCHAR (100)NOT NULL,
+    tipo_cliente VARCHAR(50)NOT NULL
+);
+CREATE TABLE dbo.PRODUCTO
+(
+    id_PRODUCTO integer identity primary key not null,
+    nombre varchar (100)not null,
+    STOCK INTEGER IDENTITY not null,
+    PRECIO_VENTA INTEGER IDENTITY NOT NULL,
+    PRECIO_COMPRA INTEGER IDENTITY NOT NULL,
+    id_categoria integer not null ,
+    FOREIGN KEY (id_categoria)references categorias(id_categoria)
+
+);
+CREATE TABLE dbo.pedido
+(
+    id_pedido INTEGER IDENTITY PRIMARY KEY NOT NULL,
+    id_cliente integer not null ,
+    FOREIGN KEY (id_cliente)REFERENCES cliente(id_cliente)
+
+);
+create table dbo.detalle_pedido
+(
+    id_detalle_pedido integer primary key not null ,
+    id_pedido integer not null ,
+    ID_PRODUCTO integer not null,
+    FOREIGN KEY (id_pedido)REFERENCES PEDIDO(id_pedido),
+    FOREIGN KEY (ID_PRODUCTO)references PRODUCTOS(ID_PRODUCTO),
+    preceio_unidad integer identity not null,
+    cantidad integer identity not null ,
+    descuento integer identity not null
+);
+CREATE TABLE dbo.categoria
+(
+    id_categoria INTEGER IDENTITY PRIMARY KEY NOT NULL,
+    tipo varchar(30)not null ,
+
+);
